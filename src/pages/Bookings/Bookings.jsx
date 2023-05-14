@@ -18,6 +18,7 @@ const Bookings = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.error);
         if (!data.error) {
           setBookings(data);
         }

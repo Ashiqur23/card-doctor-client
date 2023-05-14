@@ -36,13 +36,16 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      const loggedUser = {
+        email: currentUser?.email,
+      };
       if (currentUser) {
         fetch("https://car-doctor-server-sand-six.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify({ email: user?.email }),
+          body: JSON.stringify(loggedUser),
         })
           .then((res) => res.json())
           .then((data) => {
